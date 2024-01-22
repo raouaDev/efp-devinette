@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .span {
+        font-weight: bold;
+        text-transform: uppercase;
+        }
+        input {
+            height: 44px;
+            border-radius: 15px !important;
+            text-align: center;
+            max-width: 250px;
+          }
+          #afficher {
+            height: 45px;
+            padding: 12px;
+            background: #F5F5F5 !important;
+            appearance: none !important;
+            border-radius: 6px;
+          }
+          .grand {
+            color: green;
+        }
+         .petit {
+            color: red;
+        }
+        #nbrAleaMac {
+            filter: blur(2px) !important;
+          }
+          .resultat {
+            background: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            border-radius: 15px;
+            max-width: 230px;
+          }
+          .flex {
+        display: flex;
+        }
+        .flex-column {
+        flex-direction: column;
+        }
+        .container {
+        justify-content: center;
+        max-width: 300px;
+        margin: auto;;
+        }
+        .container div{
+        margin-top: 15px;
+        }
+        label {
+        color: #4f4d4d;
+        padding-bottom: 7px;
+        }
+        button {
+        margin-top: 20px;
+        max-width: 260px;
+        }
+        .increment span {
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <h3>Devinette: Comparer des nombres</h3>
+    <div class="container flex flex-column">
+        <div class="flex flex-column">
+            <label for="">Nombre Minimum</label>
+            <input type="number" id="nbrAleaIntr" value="" placeholder="Entrez un nombre ">
+        </div>
+        <!--
+       
+        <div class="flex flex-column">
+            <label for="">Nombre Maximum</label>
+            <input type="number" id="nbrAleaIntr" value="" placeholder="Entrez un nombre ">
+        </div>
+         -->
+        
+       <div class="flex flex-column">
+            <label for="">Nombre Aléatoire</label>
+            <input type="number" id="nbrAleaMac" value="" placeholder="">
+       </div>
+       
+        
+        
+        <button id="afficher2">Comparer</button>
+        <p class="resultat"></p>
+        <div class="resultat increment">Nombre d'essai restant : <span id="increment">3</span></div>
+    </div>
+    <br>
+    <div id="div">
+
+    </div>
+
+    <script>
+
+       
+        let nbrAleaIntr = document.getElementById('nbrAleaIntr');
+        let nbrAleaMac = document.getElementById('nbrAleaMac');
+        let resultat = document.querySelector('.resultat');
+        let increment = document.querySelector('#increment');
+        let essaiMax = 13;
+        let essaiRestant = essaiMax;
+
+        
+        increment.innerHTML = essaiRestant;
+        let nombreAleatoire = Math.floor((Math.random() * 100) + 1);
+        nbrAleaMac.value = nombreAleatoire;
+
+        afficher2.addEventListener('click', function(e) {
+            
+            if (essaiRestant > 0) {
+                if (nbrAleaIntr.value.length > 0) {
+                    
+                    let message = "Le numéro " + nbrAleaIntr.value + " introduit est"
+                    if (nbrAleaIntr.value > nbrAleaMac.value) {
+                        message  += "  plus: <strong> Grand </strong>";
+                    } else if (nbrAleaIntr.value == nbrAleaMac.value) {
+                        message += " : <strong> égal </strong> ";
+                    } else {
+                        message+= " plus: <strong> petit </strong>";
+                    }
+                    message += "que le nombre caché " 
+
+
+                    resultat.innerHTML = message;
+                    resultat.classList.add("grand");
+                    nbrAleaIntr.value = '';
+                } else {
+                    resultat.innerHTML = ("Veuillez introduire un nombre");
+                }
+
+                essaiRestant--;
+
+                increment.innerHTML = essaiRestant;
+            } else {
+                resultat.innerHTML = ("Vous avez utilisé tous vos essais. Le nombre caché était " + nbrAleaMac.value + ".");
+            }
+        });
+
+       
+    </script>
+    
+</body>
+</html>
