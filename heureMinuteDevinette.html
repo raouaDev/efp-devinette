@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALGO EX 4.2</title>
+</head>
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+        body{
+            background: url('https://img.freepik.com/vecteurs-libre/fond-nature-aquarelle-peinte-main_23-2148941599.jpg?w=1800&t=st=1706033613~exp=1706034213~hmac=977d65827fa3d513ca7c1c2e6d2a4544b38209e599b99f478b7c8163ab3f4bbb');
+        }
+        
+        * {
+            font-family: 'Oswald', sans-serif;
+        }
+        .container {
+            display: block;
+            max-width: 600px;
+            margin: auto;
+            border-radius: 13px;
+            box-shadow: #A1A1A1 1px 1px rgba(0, 0, 0, 0);
+            background: rgb(206, 209, 206, .5);
+            padding: 15px;
+            backdrop-filter: blur(3px);
+            margin-top: 20px;
+        }
+        .flex {
+            display: flex;
+        }
+        .flex-column {
+            flex-direction: column;
+        }
+        
+        *[class^="col-"] {
+            max-width: 300px;
+           
+        }
+        input {
+            height: 45px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        label {
+            color: #545454;
+            margin-top: 15px;
+        }
+        button {
+            height: 50px;
+            margin-top: 15px;
+            background: rgb(65, 134, 65);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.5rem;
+
+        }
+        #resultat {
+            text-align: center;
+            font-size: 1.3rem;
+          }
+    
+        h2 {
+        padding: 2px;
+        margin: 0;
+        text-transform: uppercase;
+        color: #545454;
+        border-bottom: #545454 dotted 3px;
+        }
+        .flex-row {
+            flex-direction: row;
+        }
+        .contentInputs {
+            width: 70%;
+        }
+        .flex-row > div:nth-child(2) {
+ 
+            justify-content: center
+          }
+          #resultat span {
+            color: green;
+            font-size: 2rem
+          }
+    </style>
+   
+<!--
+
+// Exercice 4.2
+Écrire un algorithme qui lira au clavier l’heure et les minutes (on les suppose valides), et il
+affichera l’heure qu’il sera une minute plus tard.
+
+
+algorithme HeureMinute
+
+Variables 
+Heure, minute entier 
+message en texte
+
+debut 
+
+ecrire "Introduire l'heure et la minute"
+lire heure, minute
+
+minute <= minute + 1
+
+SI heure < 24 ET heure > 0 ALORS 
+  
+  SI minute < 59 ALORS
+     heure <= heure
+     minute <= minute + 1
+     message = "Apres une minute l'heure sera: " + heure + minute +"."
+  
+  SINON SI minute = 59 ALORS 
+     heure <= heure + 1 ET minute <= 0
+     message = "Apres une minute l'heure sera: " + heure + minute +"."
+
+  SINON message = "Veuillez introduire un nombre inferier à 60"
+
+  FIN SI
+
+SINON message = "Veuillez introduire un nombre inferieur à 24"
+afficher message 
+
+FIN SI 
+fin 
+
+-->
+
+<div class="container">
+   <div class="row flex flex-column">
+    <h2>Heure et minute algo</h2>
+    <div class="flex flex-row">
+        <div class="contentInputs">
+            <div class="col- flex flex-column">
+                <label for="heure" class="" id="heure">Heure</label>
+                <input type="text" class="" id="heureInput">
+            </div>
+            <div class="col- flex flex-column">
+                <label for="heure" class="" id="heure">Minute</label>
+                <input type="text" class="minute" id="minuteInput">
+            </div>
+            <div class="col- flex flex-column">
+                <button id="afficher">Afficher</button>
+            </div>
+        </div>
+        
+        <div class="col- flex flex-column">
+           <p id="resultat"></p>
+        </div>
+    </div>
+        
+
+
+   </div>
+</div>
+    
+
+<script type="text/javascript">
+
+    document.getElementById('afficher').addEventListener("click", function(){
+        // Variables
+        let heure = parseInt(document.getElementById('heureInput').value);
+        let minute = parseInt(document.getElementById('minuteInput').value);
+        let message = "";
+        let resultat = document.getElementById('resultat');
+  
+        if (heure < 24 && heure >= 0) {
+          if (minute < 59) {
+            heure = heure;
+            minute = minute + 1;
+            message = "Après une minute, l'heure sera: <span> " + heure + "h" + minute + "min.</span>";
+          } else if (minute === 59) {
+            if (heure === 23){
+                heure = 0;
+                minute = 0;
+                message = "Après une minute, l'heure sera:  <span> " + heure + "h" + minute + "0 min.</span>";
+            }
+            
+            else {
+                heure = heure + 1;
+                minute = 0;
+                message = "Après une minute, l'heure sera:  <span> " + heure + "h" + minute + "0 min.</span>";
+            }
+           
+          } 
+        } else {
+          message = "Veuillez introduire une heure valide (0-23).";
+        }
+  
+        resultat.innerHTML = message;
+      });
+</script>
+</body>
+</html>
